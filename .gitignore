@@ -1,0 +1,18 @@
+images/*
+Availability/*
+DOCUMENTS/*
+OLD/*
+HOWTOTEST_A.txt
+
+# LibreOffice / OpenOffice lock files
+.~lock.*#
+
+# MS Office temporary files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Generic Document files
+*.docx
+*.pdf
+*.xlsx

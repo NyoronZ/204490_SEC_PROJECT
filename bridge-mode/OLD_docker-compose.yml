@@ -1,0 +1,36 @@
+services:
+  bridge-victim-web:
+    image: nginx:custom
+    container_name: bridge-mode-victim
+    networks:
+      bridge_testing_net:
+        ipv4_address: 172.20.0.10
+    ports:
+      - "8080:8080" # Outside:Inside
+    cpuset: '4-7'
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+
+  bridge-attacker:
+    image: kali:custom
+    container_name: bridge-mode-attacker
+    command: tail -f /dev/null
+    networks:
+      bridge_testing_net:
+        ipv4_address: 172.20.0.20
+    cap_add:
+      - NET_ADMIN # Give Network Permission
+    cpuset: '8-13'
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+
+networks:
+  bridge_testing_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24

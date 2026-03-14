@@ -1,0 +1,24 @@
+services:
+  host-victim-web:
+    image: nginx:custom
+    container_name: host-mode-victim
+    network_mode: host
+    cpuset: '4-7'
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+# Use port 80 of the host as nginx port
+
+  host-attacker:
+    image: kali:custom
+    container_name: host-mode-attacker
+    command: tail -f /dev/null
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+    cpuset: '8-11'
+    deploy:
+      resources:
+        limits:
+          memory: 6G
